@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="WorkPlanner.View.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WorkPlanner.View"
+    xmlns:viewModel="using:WorkPlanner.ViewModel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModel:LoginPageViewModel/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <Style x:Key="StackPanelStyle" TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="PlaceholderForeground" Value="#FFBEBEBE"/>
+            <Setter Property="BorderBrush" Value="#FFBEBEBE"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="RequestedTheme" Value="Dark"/>
+        </Style>
+        <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="RequestedTheme" Value="Dark"/>
+            <Setter Property="BorderBrush" Value="#FFBEBEBE"/>
+            <Setter Property="SelectionHighlightColor" Value="#FFBEBEBE"/>
+            <Setter Property="BorderThickness" Value="0,0,0,2"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF1E1E27"/>
+            <GradientStop Color="#FF2B2B37" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <ComboBox Grid.Column="2" Grid.Row="2" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding EmployeeCollection}" SelectedValue="{Binding SelEmployees, Mode=TwoWay}" PlaceholderText="User">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding FirstName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <PasswordBox Grid.Column="2" Grid.Row="4" Style="{StaticResource PasswordBoxStyle}" Password="{Binding Password, Mode=TwoWay}" PlaceholderText="Password"/>
+        <StackPanel Grid.Column="2" Grid.Row="5" Style="{StaticResource StackPanelStyle}">
+            <TextBlock Text="{Binding Message}"></TextBlock>
+        </StackPanel>
+        <AppBarButton Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" Label="Sign in" Command="{Binding LoginCommand}" Icon="Send" RequestedTheme="Dark" Foreground="#FFBEBEBE"/>
+    </Grid>
+</Page>
