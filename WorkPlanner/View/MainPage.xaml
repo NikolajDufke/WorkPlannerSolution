@@ -7,6 +7,7 @@
     xmlns:ViewModel="using:WorkPlanner.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converter="using:WorkPlanner.Converter"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -14,6 +15,8 @@
       <ViewModel:MainPageViewModel/>
     </Page.DataContext>
     <Page.Resources>
+        <converter:DateTimeConvertToHourMinute x:Key="ConverterHourMinute"></converter:DateTimeConvertToHourMinute>
+
         <ViewModel:MainPageViewModel x:Key="MainPageViewModelInstance" />
     </Page.Resources>
 
@@ -27,18 +30,31 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="1">
-            <ListView ItemsSource="{Binding }" SelectedValue="{Binding SelectedEmployee, Mode=TwoWay}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <Image Source="{Binding Employee.picture}" />
-                            <TextBlock Text="{Binding Employee.Name}"/>
+       
+        <ListView Grid.Column="1" ItemsSource="{Binding Worktimes}"> 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="../Assets/person-icon-1675.png"></Image>
+
+                        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding StarTime , Converter={StaticResource ConverterHourMinute}}"></TextBlock>
+                    <TextBlock Text=" - "></TextBlock>
+                                <TextBlock Text="{Binding EndTime ,Converter={StaticResource ConverterHourMinute}}"></TextBlock>
+                 </StackPanel>
                         </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
             <AppBarButton Label="Test" Height="50" Width="80" Margin="22,-5" Icon="Back" Click="AppBarButton_Click"/>
-        </StackPanel>
+   
     </Grid>
 </Page>

@@ -9,14 +9,16 @@ namespace WorkPlanner.Model
 {
    public class WorktimeEventDetails
     {
-        public WorktimeEventDetails(string color, string name, int worktimeId)
-        {
-            _color = color;
-            _name = name;
-            _WorktimeId = worktimeId;
-        }
-
         private string _color;
+        private Employees _employee;
+        private Worktimes _worktime;
+
+        public WorktimeEventDetails(Employees employee, Worktimes worktime)
+        {
+
+            _employee = employee;
+            _worktime = worktime;
+        }
 
         public string Color    
         {
@@ -24,26 +26,24 @@ namespace WorkPlanner.Model
             set { _color = value; }
         }
 
-        private string _name;
-
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _employee.FirstName + " " + _employee.LastName; ; }
         }
-
-        private int _WorktimeId;
 
         public int WorktimeID
         {
-            get { return _WorktimeId; }
-            set { _WorktimeId = value; }
+            get { return _worktime.WorkTimeID; }
+        } 
+
+        public DateTime StarTime
+        {
+            get { return _worktime.TimeStart; }
         }
 
-  
-
-    
-
-
+        public DateTime EndTime
+        {
+            get { return _worktime.TimeEnd; }
+        }
     }
 }

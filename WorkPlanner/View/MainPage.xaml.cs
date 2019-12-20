@@ -30,7 +30,7 @@ namespace WorkPlanner.View
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(CreateWorkTimePage));
+            Frame.Navigate(typeof(LoginPage));
         }
     }
 }

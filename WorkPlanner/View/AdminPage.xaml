@@ -26,7 +26,7 @@
 
         <Style x:Key="ButtonStyle" TargetType="AppBarButton">
             <Setter Property="Width" Value="50"/>
-            <Setter Property="Height" Value="35"/>
+            <Setter Property="Height" Value="Auto"/>
             <Setter Property="Background" Value="LightGray"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -49,7 +49,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
 
         </Grid.RowDefinitions>
@@ -97,7 +97,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
 
 
@@ -132,7 +132,7 @@
                 </StackPanel>
 
 
-                <ScrollViewer Grid.Row="1" Grid.ColumnSpan="100" >
+                <ScrollViewer Grid.Row="1" Grid.ColumnSpan="100"  >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="55"></ColumnDefinition>
@@ -377,9 +377,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <AppBarButton Icon="Add" Click="AddWorkTimeButton" Style="{StaticResource ButtonStyle}"/>
-                <AppBarButton Grid.Column="2" Icon="Edit" Style="{StaticResource ButtonStyle}"></AppBarButton>
-                <AppBarButton Grid.Column="4" Icon="Delete" Command="{Binding DeleteWorktimeCommand}" Style="{StaticResource ButtonStyle}"></AppBarButton>
+
+                <AppBarButton Icon="Add" Label="Opret" Click="AddWorkTimeButton" Style="{StaticResource ButtonStyle}"/>
+                <AppBarButton Grid.Column="2" Label="Rediger"  Icon="Edit" Style="{StaticResource ButtonStyle}"></AppBarButton>
+                <AppBarButton Grid.Column="4" Icon="Delete" Label="Slet" Command="{Binding DeleteWorktimeCommand}" Style="{StaticResource ButtonStyle}"></AppBarButton>
                 <AppBarButton Grid.Row="1" Grid.Column="6" HorizontalAlignment="Right" Label="FontIcon" Command="{Binding ChangeVisibility}" Style="{StaticResource ButtonStyle}">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE74B;"/>
