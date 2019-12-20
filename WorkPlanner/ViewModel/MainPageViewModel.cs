@@ -6,7 +6,9 @@ using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.ApplicationModel;
+using WorkPlanner.Common;
 using WorkPlanner.Handler;
 using WorkPlanner.Model;
 
@@ -18,7 +20,7 @@ namespace WorkPlanner.ViewModel
         private ObservableCollection<WorktimeEventDetails> _eventElements;
         private DateTime _date;
         private MainPageHandler _handler;
-
+        private ICommand _checkinChectOutCommand;
 
         public MainPageViewModel()
         {
@@ -39,6 +41,15 @@ namespace WorkPlanner.ViewModel
             set { _eventElements = value; }
         }
 
+
+        public ICommand CheckinChectOutCommand
+        {
+            get
+            {
+                return _checkinChectOutCommand ?? (_checkinChectOutCommand =
+                           new RelayArgCommand<int>(ev => _handler.CheckinChectOut(ev)));
+            }
+        }
 
     }
 }

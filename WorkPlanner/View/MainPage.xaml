@@ -16,8 +16,15 @@
     </Page.DataContext>
     <Page.Resources>
         <converter:DateTimeConvertToHourMinute x:Key="ConverterHourMinute"></converter:DateTimeConvertToHourMinute>
-
         <ViewModel:MainPageViewModel x:Key="MainPageViewModelInstance" />
+
+
+        <Style x:Key="TitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -27,34 +34,40 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-       
-        <ListView Grid.Column="1" ItemsSource="{Binding Worktimes}"> 
-            <ListView.ItemTemplate>
+
+
+        <Grid Grid.Column="1" Background="LightSteelBlue">
+            <TextBlock Grid.Column="1" Text ="-- Vagter idag --" Style="{StaticResource TitleStyle}"></TextBlock>
+        </Grid>
+
+        <ItemsControl Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Worktimes}">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="10*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="../Assets/person-icon-1675.png"></Image>
-
-                        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
-                    <TextBlock Text="{Binding Name}"></TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding StarTime , Converter={StaticResource ConverterHourMinute}}"></TextBlock>
-                    <TextBlock Text=" - "></TextBlock>
-                                <TextBlock Text="{Binding EndTime ,Converter={StaticResource ConverterHourMinute}}"></TextBlock>
-                 </StackPanel>
-                        </StackPanel>
-                    </Grid>
+                    <Button HorizontalAlignment="Stretch" Margin="10" Command="{Binding DataContext.CheckinChectOutCommand,ElementName=Page}" CommandParameter="{Binding WorktimeID}">
+                        <Button.Content>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="../Assets/person-icon-1675.png" Margin="0,0,10,10"></Image>
+                                <StackPanel Grid.Column="1" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{Binding Name}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding StarTime , Converter={StaticResource ConverterHourMinute}}"></TextBlock>
+                                        <TextBlock Text=" - "></TextBlock>
+                                        <TextBlock Text="{Binding EndTime ,Converter={StaticResource ConverterHourMinute}}"></TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </Button.Content>
+                    </Button>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-            <AppBarButton Label="Test" Height="50" Width="80" Margin="22,-5" Icon="Back" Click="AppBarButton_Click"/>
-   
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <AppBarButton Label="Test" Height="50" Width="80" Margin="22,-5" Icon="Back" Click="AppBarButton_Click"/>
     </Grid>
 </Page>

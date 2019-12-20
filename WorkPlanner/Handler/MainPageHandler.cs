@@ -52,6 +52,9 @@ namespace WorkPlanner.Handler
 
         }
 
-
+        public void CheckinChectOut(int ev)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
